@@ -8,7 +8,8 @@ A interface (CustomTkinter) coleta as dimensões do casco, os tipos de tampo e a
 
 | Arquivo | Função |
 |---|---|
-| `interface.py` | Interface gráfica: entrada de parâmetros, cadastro de bocais e disparo do SpaceClaim |
+| `main.py` / `interface.py` | Interface gráfica: dados do vaso, cadastro de bocais, pré-visualização, validação e disparo do SpaceClaim |
+| `vaso_geom.py` | Geometria dos tampos e validação (mesma matemática da rotina, sem depender do SpaceClaim) |
 | `rotina.py` | Script do SpaceClaim (API V252): lê o JSON e gera costado, tampos, bocais e PADs |
 | `parametros_vaso.json` | Parâmetros do vaso (gerado pela interface; o do repositório serve de exemplo) |
 
@@ -28,13 +29,19 @@ pip install -r requirements.txt
 
 ## Uso
 
-1. Execute a interface **a partir da pasta do projeto** (os caminhos do JSON e da rotina são relativos ao diretório atual):
-   ```bash
-   python interface.py
-   ```
-2. Na aba **1. Parâmetros do Casco**, preencha diâmetro, comprimento, *straight flange*, espessuras, ângulo do cone e o tipo de cada tampo.
-3. Na aba **2. Gerenciar Bocais**, escolha o local (costado, tampo superior ou inferior), preencha as dimensões e clique em **Adicionar à Lista**. Marque a opção de PAD para incluir chapa de reforço.
-4. Clique em **Gerar Geometria no SpaceClaim**.
+```bash
+python main.py
+```
+
+- **Esquerda:** dados do casco e dos tampos, e o formulário do bocal. Números aceitam vírgula ou ponto.
+- **Pré-visualização:** elevação e planta são atualizadas enquanto você digita. O bocal em edição aparece tracejado em azul. Clique num bocal para selecioná-lo; duplo clique para editar.
+- **Tabela de bocais:** editar (duplo clique), duplicar ou remover (Del).
+- **Validação:** aponta antes de gerar os bocais que saem do costado ou do tampo, sobreposições, nomes repetidos, pad menor que o bocal etc.
+- **Projetos:** Novo / Abrir / Salvar (Ctrl+N, Ctrl+O, Ctrl+S). Ao abrir, a interface carrega o último `parametros_vaso.json`.
+- **Gerar no SpaceClaim (F5):** salva `parametros_vaso.json` e abre o SpaceClaim executando `rotina.py`.
+- **Diâmetros externos:** se marcado, o Ø do costado e dos bocais é convertido para a superfície média (D − t) antes de ir para a rotina.
+
+Convenções: Y = 0 no meio do costado; bocais no costado são posicionados pela altura Y, nos tampos pelo raio a partir do eixo; ângulo em planta 0° = +X, 90° = +Z.
 
 ### Tipos de tampo suportados
 
@@ -58,10 +65,4 @@ Cada bocal tem `nome`, `diametro`, `pescoco`, `angulo`, `espessura` e `esp_tampa
 
 ## Configuração
 
-O caminho do SpaceClaim está fixo em `interface.py`:
-
-```python
-caminho_spaceclaim = r"C:\Program Files\ANSYS Inc\v252\scdm\SpaceClaim.exe"
-```
-
-Ajuste se a sua instalação estiver em outro local ou versão. Ao mudar de versão do ANSYS, atualize também o import da API no início de `rotina.py` (`SpaceClaim.Api.V252`).
+O caminho do SpaceClaim é detectado automaticamente em `C:\Program Files\ANSYS Inc\v*\scdm\`. Para mudar, clique no indicador **SpaceClaim** no topo da interface (fica salvo em `config_interface.json`) ou defina a variável de ambiente `SPACECLAIM_EXE`. Ao mudar de versão do ANSYS, atualize também o import da API no início de `rotina.py` (`SpaceClaim.Api.V252`).

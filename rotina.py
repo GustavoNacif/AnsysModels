@@ -66,8 +66,9 @@ def calc_tampo_params(tipo, R, Y0, ang_cone_deg):
     elif tipo == "Toricônico":
         KR = 0.06 * D
         CXk, CYk = R - KR, Y0
-        TX = CXk + KR * math.sin(alpha)
-        TY = CYk + KR * math.cos(alpha)
+        # Ponto de tangência entre a junta tórica e o cone (meio-ângulo alpha)
+        TX = CXk + KR * math.cos(alpha)
+        TY = CYk + KR * math.sin(alpha)
         Y_top = TY + TX / math.tan(alpha)
         return is_conical, None, CXk, CYk, TX, TY, Y_top, KR
     elif "Hemis" in tipo:

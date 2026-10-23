@@ -1,0 +1,175 @@
+{
+    "CostadoDiametro": 1400.0,
+    "CostadoComprimento": 7460.0,
+    "SF": 103.0,
+    "esp_costado": 78.4,
+    "esp_tampo_sup": 78.4,
+    "esp_tampo_inf": 78.4,
+    "AnguloCone": 30.0,
+    "lista_costado": [
+        {
+            "nome": "2B",
+            "diametro": 154.4,
+            "pescoco": 300.0,
+            "angulo": 30.0,
+            "espessura": 12.67,
+            "esp_tampa": 50.0,
+            "altura_y": 447.0,
+            "pad_diametro": 340.0,
+            "esp_pad": 143.4
+        },
+        {
+            "nome": "2D",
+            "diametro": 154.4,
+            "pescoco": 300.0,
+            "angulo": 30.0,
+            "espessura": 12.67,
+            "esp_tampa": 50.0,
+            "altura_y": -1947.0,
+            "pad_diametro": 340.0,
+            "esp_pad": 143.4
+        },
+        {
+            "nome": "3A",
+            "diametro": 203.2,
+            "pescoco": 300.0,
+            "angulo": 270.0,
+            "espessura": 16.66,
+            "esp_tampa": 50.0,
+            "altura_y": 3803.0,
+            "pad_diametro": 381.0,
+            "esp_pad": 158.4
+        },
+        {
+            "nome": "3B",
+            "diametro": 203.2,
+            "pescoco": 300.0,
+            "angulo": 270.0,
+            "espessura": 16.66,
+            "esp_tampa": 50.0,
+            "altura_y": 1528.0,
+            "pad_diametro": 381.0,
+            "esp_pad": 158.4
+        },
+        {
+            "nome": "3C",
+            "diametro": 203.2,
+            "pescoco": 300.0,
+            "angulo": 270.0,
+            "espessura": 16.66,
+            "esp_tampa": 50.0,
+            "altura_y": -22.0,
+            "pad_diametro": 381.0,
+            "esp_pad": 158.4
+        },
+        {
+            "nome": "3D",
+            "diametro": 203.2,
+            "pescoco": 300.0,
+            "angulo": 270.0,
+            "espessura": 16.66,
+            "esp_tampa": 50.0,
+            "altura_y": -2297.0,
+            "pad_diametro": 381.0,
+            "esp_pad": 158.4
+        }
+    ],
+    "lista_tampo_sup": [],
+    "lista_tampo_inf": [],
+    "TipoTampoSup": "Elipsoidal 2:1",
+    "TipoTampoInf": "Elipsoidal 2:1",
+    "_entrada": {
+        "vaso": {
+            "CostadoDiametro": 1400.0,
+            "CostadoComprimento": 7460.0,
+            "SF": 103.0,
+            "esp_costado": 78.4,
+            "esp_tampo_sup": 78.4,
+            "esp_tampo_inf": 78.4,
+            "AnguloCone": 30.0,
+            "TipoTampoSup": "Elipsoidal 2:1",
+            "TipoTampoInf": "Elipsoidal 2:1"
+        },
+        "bocais": [
+            {
+                "nome": "2B",
+                "local": "Costado",
+                "diametro": 154.4,
+                "pescoco": 300.0,
+                "posicao": 447.0,
+                "angulo": 30.0,
+                "espessura": 12.67,
+                "esp_tampa": 50.0,
+                "pad": true,
+                "pad_diametro": 340.0,
+                "esp_pad": 143.4
+            },
+            {
+                "nome": "2D",
+                "local": "Costado",
+                "diametro": 154.4,
+                "pescoco": 300.0,
+                "posicao": -1947.0,
+                "angulo": 30.0,
+                "espessura": 12.67,
+                "esp_tampa": 50.0,
+                "pad": true,
+                "pad_diametro": 340.0,
+                "esp_pad": 143.4
+            },
+            {
+                "nome": "3A",
+                "local": "Costado",
+                "diametro": 203.2,
+                "pescoco": 300.0,
+                "posicao": 3803.0,
+                "angulo": 270.0,
+                "espessura": 16.66,
+                "esp_tampa": 50.0,
+                "pad": true,
+                "pad_diametro": 381.0,
+                "esp_pad": 158.4
+            },
+            {
+                "nome": "3B",
+                "local": "Costado",
+                "diametro": 203.2,
+                "pescoco": 300.0,
+                "posicao": 1528.0,
+                "angulo": 270.0,
+                "espessura": 16.66,
+                "esp_tampa": 50.0,
+                "pad": true,
+                "pad_diametro": 381.0,
+                "esp_pad": 158.4
+            },
+            {
+                "nome": "3C",
+                "local": "Costado",
+                "diametro": 203.2,
+                "pescoco": 300.0,
+                "posicao": -22.0,
+                "angulo": 270.0,
+                "espessura": 16.66,
+                "esp_tampa": 50.0,
+                "pad": true,
+                "pad_diametro": 381.0,
+                "esp_pad": 158.4
+            },
+            {
+                "nome": "3D",
+                "local": "Costado",
+                "diametro": 203.2,
+                "pescoco": 300.0,
+                "posicao": -2297.0,
+                "angulo": 270.0,
+                "espessura": 16.66,
+                "esp_tampa": 50.0,
+                "pad": true,
+                "pad_diametro": 381.0,
+                "esp_pad": 158.4
+            }
+        ],
+        "diametros_externos": false
+    }
+}
