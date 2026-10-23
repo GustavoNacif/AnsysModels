@@ -1,4 +1,5 @@
 # Python Script, API Version = V252
+# -*- coding: utf-8 -*-
 import math
 import json
 import os
@@ -7,8 +8,24 @@ from SpaceClaim.Api.V252 import Command
 # ==========================================
 # 1. PARÂMETROS DO VASO (LIDOS DO JSON)
 # ==========================================
-# O script assume que o JSON está na mesma pasta que ele
-caminho_json = r"parametros_vaso.json"
+# Procura o JSON: 1) caminho enviado pela interface (VASO_JSON),
+# 2) mesma pasta deste script, 3) diretório atual.
+def _localizar_json():
+    candidatos = []
+    if os.environ.get("VASO_JSON"):
+        candidatos.append(os.environ["VASO_JSON"])
+    try:
+        candidatos.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "parametros_vaso.json"))
+    except NameError:
+        pass
+    candidatos.append(os.path.join(os.getcwd(), "parametros_vaso.json"))
+    for c in candidatos:
+        if os.path.isfile(c):
+            return c
+    raise IOError("parametros_vaso.json nao encontrado. Procurado em: " + "; ".join(candidatos))
+
+caminho_json = _localizar_json()
+print("Lendo parametros de: " + caminho_json)
 
 with open(caminho_json, "r") as f:
     dados = json.load(f)

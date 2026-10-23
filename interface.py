@@ -4,6 +4,15 @@ import subprocess
 import os
 import tkinter.messagebox as messagebox
 
+# Pasta onde ficam interface.py, rotina.py e o JSON (independe do diretório de trabalho)
+PASTA_PROJETO = os.path.dirname(os.path.abspath(__file__))
+CAMINHO_JSON = os.path.join(PASTA_PROJETO, "parametros_vaso.json")
+CAMINHO_ROTINA = os.path.join(PASTA_PROJETO, "rotina.py")
+
+# Caminho do SpaceClaim: pode ser sobrescrito pela variável de ambiente SPACECLAIM_EXE
+CAMINHO_SPACECLAIM = os.environ.get(
+    "SPACECLAIM_EXE", r"C:\Program Files\ANSYS Inc\v252\scdm\SpaceClaim.exe")
+
 # Configurações visuais do CustomTkinter
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
@@ -231,17 +240,22 @@ class AppVasoPressao(ctk.CTk):
         dados_json["TipoTampoInf"] = self.cb_tipo_inf.get()
 
         # Salva o arquivo JSON
-        caminho_json = os.path.join(os.getcwd(), "parametros_vaso.json")
-        with open(caminho_json, "w", encoding='utf-8') as f:
+        with open(CAMINHO_JSON, "w", encoding='utf-8') as f:
             json.dump(dados_json, f, indent=4)
 
-        # Chama o SpaceClaim (Ajuste o caminho se necessário)
-        caminho_spaceclaim = r"C:\Program Files\ANSYS Inc\v252\scdm\SpaceClaim.exe"
-        caminho_script = os.path.join(os.getcwd(), "Rotina.py")
+        if not os.path.isfile(CAMINHO_SPACECLAIM):
+            messagebox.showerror(
+                "SpaceClaim não encontrado",
+                f"JSON salvo em:\n{CAMINHO_JSON}\n\nMas o SpaceClaim não foi encontrado em:\n{CAMINHO_SPACECLAIM}\n\n"
+                "Ajuste CAMINHO_SPACECLAIM em interface.py ou defina a variável de ambiente SPACECLAIM_EXE.")
+            return
 
         try:
-            comando = f'"{caminho_spaceclaim}" /RunScript="{caminho_script}"'
-            subprocess.Popen(comando, shell=True)
+            # Passa o caminho do JSON para a rotina via variável de ambiente
+            env = os.environ.copy()
+            env["VASO_JSON"] = CAMINHO_JSON
+            comando = [CAMINHO_SPACECLAIM, f"/RunScript={CAMINHO_ROTINA}"]
+            subprocess.Popen(comando, cwd=PASTA_PROJETO, env=env)
             messagebox.showinfo("Iniciando", "Geometria sendo gerada! Aguarde o SpaceClaim.")
         except Exception as e:
             messagebox.showerror("Erro de Execução", f"Falha ao abrir SpaceClaim:\n{str(e)}")
